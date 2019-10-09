@@ -26,6 +26,9 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+  }
+  agent pankrys
+  stages{
     stage('Update version') {
       steps{
         sh('''#!/bin/bash
@@ -44,4 +47,5 @@ pipeline {
       }
     }
   }
+
 }
