@@ -31,7 +31,7 @@ pipeline {
         sh('''#!/bin/bash
         echo "update $registry:$BUILD_NUMBER"
         ssh pankrys@192.168.113.36
-        sed -i -e 's/image: pankrys/wpdev:2/image: $registry:$BUILD_NUMBER' /home/pankrys/project/fine_sa/prod/docker-compose.yml
+        sed -i '4s!/image: pankrys/wpdev:2!image: $registry:$BUILD_NUMBER' /home/pankrys/project/fine_sa/prod/docker-compose.yml
         exit
       ''')
       }
