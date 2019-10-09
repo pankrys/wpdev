@@ -31,6 +31,7 @@ pipeline {
         sh('''#!/bin/bash
         echo "update $registry:$BUILD_NUMBER"
         ssh pankrys@192.168.113.36
+        whoami
         #sed '4s,pankrys/wpdev:2,"$registry:$BUILD_NUMBER"' /home/pankrys/project/fine_sa/prod/docker-compose.yml
         docker stop prod_wordpress_1 prod_db_1 dev_wordpress_1 dev_db_1
         cp -r /home/pankrys/project/fine_sa/dev/mysql/wordpress /home/pankrys/project/fine_sa/prod/mysql/wordpress
