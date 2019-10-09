@@ -3,7 +3,7 @@ pipeline {
     registry = "pankrys/wpdev"
     registryCredential = 'dockerhub'
   }
-  agent pankrys
+  agent{ node { label 'pankrys'}}
   stages {
     stage('Building image') {
       steps{
