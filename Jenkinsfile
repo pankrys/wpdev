@@ -3,7 +3,7 @@ pipeline {
     registry = "pankrys/wpdev"
     registryCredential = 'dockerhub'
   }
-  agent any
+  agent pankrys
   stages {
     stage('Building image') {
       steps{
@@ -26,9 +26,6 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-  }
-  agent pankrys
-  stages{
     stage('Update version') {
       steps{
         sh('''#!/bin/bash
@@ -47,5 +44,4 @@ pipeline {
       }
     }
   }
-
 }
