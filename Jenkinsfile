@@ -26,15 +26,5 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-    stage('Update version') {
-      steps{
-        sh('''#!/bin/bash
-        echo "update $registry:$BUILD_NUMBER"
-        ssh pankrys@192.168.113.36
-        sed '4s,pankrys/wpdev:2,"$registry:$BUILD_NUMBER"' /home/pankrys/project/fine_sa/prod/docker-compose.yml
-        exit
-      ''')
-      }
-    }
   }
 }
