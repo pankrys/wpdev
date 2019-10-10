@@ -1,0 +1,45 @@
+---
+- name: Docker-stop dev
+  docker_compose:
+    project_src: /home/pankrys/project/fine_sa/dev
+    build: no
+    stopped: yes
+  register: output
+  tags: [stop, dev, first]
+- debug:
+        var: output
+  tags: [never, debug]
+- name: Docker-stop prod
+  docker_compose:
+    project_src: /home/pankrys/project/fine_sa/prod
+    build: no
+    stopped: yes
+  register: output
+  tags: [stop, prod, first]
+- debug:
+        var: output
+  tags: [never, debug]
+- name: copyDB
+  shell: sqldump -uroot -psecret -h127.0.0.1 -P3301 wordpress > /home/pankrys/project/ansible/mysql/wordpress.sql
+  tags: [never, copy, first]
+- name: pastDB
+  shell: sqldump -uroot -psecret -h127.0.0.1 -P3302 wordpress < /home/pankrys/project/ansible/mysql/wordpress.sql
+  tags: [never, copy, first]
+- name: Docker-start dev
+  docker_compose:
+    project_src: /home/pankrys/project/fine_sa/dev
+    build: no
+  register: output
+  tags: [start, dev, first]
+- debug:
+        var: output
+  tags: [never, debug, first]
+- name: Docker-start prod
+  docker_compose:
+    project_src: /home/pankrys/project/fine_sa/prod
+    build: yes
+  register: output
+  tags: [start, prod, first]
+- debug:
+        var: output
+  tags: [never, debug, first]

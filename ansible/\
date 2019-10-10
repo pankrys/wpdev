@@ -1,0 +1,7 @@
+---
+- name: Docker-stop
+  docker_compose:
+    project_src: /home/pankrys/project/fine_sa/dev
+    build: no
+    stopped: yes
+  register: output

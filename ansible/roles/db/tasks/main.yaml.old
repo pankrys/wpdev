@@ -1,0 +1,3 @@
+---
+- name: msqldmp
+  shell: "docker exec -it 00wp_db_1 mysqldmp --databases wordpress > /tmp/wordpres.sql"
